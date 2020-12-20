@@ -1,40 +1,63 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
-import styled from "styled-components/native"; 
+import { useSelector } from 'react-redux';
+import styled from "styled-components/native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ActivityIndicator from '../ActivityIndicator';
 import Colors from '../../library/colors';
 
 const StatusBar = styled.StatusBar``;
 const TouchableOpacity = styled.TouchableOpacity``;
-
 const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   height: 50px;
   background-color: ${Colors.lightBlue};
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
-
-const Left = styled.View`
+const LeftIcon = styled.View`
   width: 50px;
   height: 50px;
   align-items: center;
   justify-content: center;
 `;
+const Title = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  color: ${Colors.black};
+  text-align: center;
+`;
+const Languages = styled.View`
+  flex-direction: row;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+`;
+const LanguageText = styled.Text`
+  font-weight: ${({selected}) => (selected ? 'bold' : 'normal')};
+  color: ${({disabled}) => (disabled ? Colors.blue : Colors.black)};
+`;
 
 export default function Header({
   title = '',
+  back = false,
   onBackPress = () => {},
   onMenuPress = () => {},
-  back = false,
+  changeLanguage = () => {},
 }) {
+
+  const { selectedCountry, loading } = useSelector(state => state.test);
+
+  const change_gb = () => {
+    changeLanguage('gb')
+  }
+
+  const change_us = () => {
+    changeLanguage('us')
+  }
+
   return (
     <>
       <StatusBar
@@ -44,17 +67,16 @@ export default function Header({
 
       <Wrapper>
 
-        <Left>
+        <LeftIcon>
           {back ? (
             <TouchableOpacity
               activeOpacity={0.75}
               onPress={onBackPress}
             >
               <Icon
-                size={24}
-                color="black"
+                size={30}
+                color={Colors.black}
                 name="arrow-left"
-                style={{ marginRight: 20 }}
               />
             </TouchableOpacity>
           ) : (
@@ -63,56 +85,51 @@ export default function Header({
               onPress={onMenuPress}
             >
               <Icon
-                size={34}
-                color="black"
+                size={30}
+                color={Colors.black}
                 name="menu"
-                style={{ marginRight: 20 }}
               />
             </TouchableOpacity>
           )}
-        </Left>
+        </LeftIcon>
 
-        <Text style={styles.title}>
-          {title}
-        </Text>
+        <Title>{title}</Title>
 
-        <View style={styles.iconContainer}>
-          {true ? (
-            <ActivityIndicator
-              color={Colors.black}
-              style={styles.activityIndicator}
-            />
+        <Languages>
+          {loading ? (
+            <ActivityIndicator />
           ) : (
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={onIconPress}
-            >
-              <Text>En/Us</Text>
-            </TouchableOpacity>
+            <>
+              <TouchableOpacity
+                onPress={change_gb}
+                activeOpacity={0.75}
+                disabled={selectedCountry === 'gb'}
+              >
+                <LanguageText
+                  disabled={back}
+                  selected={selectedCountry === 'gb'}
+                >
+                  GB
+                </LanguageText>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={change_us}
+                activeOpacity={0.75}
+                disabled={selectedCountry === 'us'}
+              >
+                <LanguageText
+                  disabled={back}
+                  selected={selectedCountry === 'us'}
+                >
+                  US
+                </LanguageText>
+              </TouchableOpacity>
+            </>
           )}
-        </View>
+        </Languages>
 
       </Wrapper>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'black',
-    textAlign: 'center',
-  },
-  iconContainer: {
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  activityIndicator: { ...StyleSheet.absoluteFillObject },
-  icon: {
-    width: 24,
-    height: 24,
-  },
-});

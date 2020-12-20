@@ -1,5 +1,6 @@
 const initialState = {
-
+  selectedCountry: 'gb',
+  loading: false,
 };
 
 export default function reducer (state = initialState, action) {

@@ -8,11 +8,16 @@ export default function TopNews (props) {
     props.navigation.toggleDrawer();
   }
 
+  const changeLanguageHandler = (input) => {
+    alert(input)
+  }
+
   return(
     <>
       <Header
-        title="Top News"
+        title='Top News'
         onMenuPress={toggleDrawer}
+        changeLanguage={changeLanguageHandler}
       />
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>TopNews Screen</Text>
