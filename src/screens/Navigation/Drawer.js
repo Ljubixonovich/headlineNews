@@ -28,6 +28,7 @@ export default function ({
       <Drawer.Screen
         key="TopNews"
         name="TopNews"
+        options={{swipeEnabled: false}}
       >
         {Stack_TopNews}
       </Drawer.Screen>
@@ -35,6 +36,7 @@ export default function ({
       <Drawer.Screen
         key="Categories"
         name="Categories"
+        options={{swipeEnabled: false}}
       >
         {Stack_Categories}
       </Drawer.Screen>
@@ -42,6 +44,7 @@ export default function ({
       <Drawer.Screen
         key="Search"
         name="Search"
+        options={{swipeEnabled: false}}
       >
         {Stack_Search}
       </Drawer.Screen>
