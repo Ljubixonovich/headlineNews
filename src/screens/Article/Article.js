@@ -30,6 +30,10 @@ const Image = styled.Image`
   width: 250px;
   height: 250px;
 `;
+const ImagePlaceholder = styled.View`
+  width: 250px;
+  height: 250px;
+`;
 const Content = styled.Text`
   font-size: 15px;
 `;
@@ -62,7 +66,11 @@ export default function Article (props) {
         <PageWrapper>
           <Title>{article.title}</Title>
           <ImageWrapper>
-            <Image source={{ uri: article.urlToImage }} />
+            {!!article.urlToImage ? (
+              <Image source={{ uri: article.urlToImage }} />
+            ) : (
+              <ImagePlaceholder />
+            )}
           </ImageWrapper>
           <Content>{article.content}</Content>
           <ButtonWrapper onPress={linkPressHandler}>

@@ -19,6 +19,13 @@ const Image = styled.Image`
   width: 60px;
   height: 60px;
 `;
+const ImagePlaceholder = styled.View`
+  align-self: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 60px;
+  height: 60px;
+`;
 const Description = styled.Text`
   font-size: 13px;
 `;
@@ -32,7 +39,11 @@ export default function NewsItem({
   return (
     <Wrapper onPress={onPress}>
       <Title>{title}</Title>
-      <Image source={{ uri: urlToImage }} />
+      {!!urlToImage ? (
+        <Image source={{ uri: urlToImage }} />
+        ) : (
+        <ImagePlaceholder />
+      )}
       <Description>{description}</Description>
     </Wrapper>
   );
