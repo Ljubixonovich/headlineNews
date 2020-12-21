@@ -46,7 +46,7 @@ const Languages = styled.View`
 const LanguageText = styled.Text`
   font-size: 20px;
   font-weight: ${({selected}) => (selected ? 'bold' : 'normal')};
-  color: ${({disabled}) => (disabled ? Colors.blue : Colors.black)};
+  color: ${({disabled}) => (disabled ? Colors.gray : Colors.black)};
 `;
 const HeaderOption = styled.TouchableOpacity`
   padding: 10px;
@@ -131,6 +131,7 @@ export default function Header({
                 <TouchableOpacity
                   onPress={toggleOptionsVisible}
                   activeOpacity={0.75}
+                  disabled={back}
                 >
                   <LanguageText
                     disabled={back}
