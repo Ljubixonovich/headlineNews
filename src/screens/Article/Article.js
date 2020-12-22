@@ -2,7 +2,7 @@ import React from 'react';
 import { Linking } from 'react-native';
 import styled from "styled-components/native";
 import Header from '../../components/Header';
-import Colors from '../../library/colors'; 
+import Colors from '../../library/colors';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -55,7 +55,7 @@ export default function Article (props) {
     article.url && Linking.openURL(article.url);
   }
 
-  return(
+  return (
     <Wrapper>
       <Header
         title="Article News"

@@ -12,7 +12,7 @@ export default function TopNews (props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: GET_NEWS_SAGA, selectedCountry, pageSize: 0 });
+    dispatch({ type: GET_NEWS_SAGA, selectedCountry });
   }, [selectedCountry])
 
   const toggleDrawer = () => {
@@ -31,7 +31,7 @@ export default function TopNews (props) {
     return LetterCodes.find(c => c.code === selectedCountry).country;
   }
 
-  return(
+  return (
     <Wrapper>
       <Header
         title='Top News'
@@ -42,7 +42,7 @@ export default function TopNews (props) {
         <Title>{getTitle()}</Title>
         <ArticlesWrapper>
           {articles && !!articles.length && articles.map((item, i) => (
-            <NewsItem 
+            <NewsItem
               key={i}
               title={item.title}
               description={item.description}

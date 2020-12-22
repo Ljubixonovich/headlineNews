@@ -67,7 +67,7 @@ export default function Search (props) {
     });
   }
 
-  return(
+  return (
     <Wrapper>
       <Header
         title='Search Top News'

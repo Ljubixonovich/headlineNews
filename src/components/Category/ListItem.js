@@ -38,11 +38,11 @@ export default function ListItem({
 }) {
 
   const getTitle = () => {
-    return title.length > 28 ? title.slice(0, 27).concat('...') : title;
+    return !!title && title.length > 28 ? title.slice(0, 27).concat('...') : title;
   }
 
   const getDescription = () => {
-    return description.length > 29 ? description.slice(0, 28).concat('...') : description;
+    return !!description && description.length > 29 ? description.slice(0, 28).concat('...') : description;
   }
 
   return (
