@@ -1,28 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from "styled-components/native";
 import Header from '../../components/Header';
 import NewsItem from '../../components/NewsItem';
 import { GET_NEWS_SAGA, SET_COUNTRY_SAGA } from '../../store/actions';
-import { LetterCodes } from '../../library/letterCodes'; 
+import { LetterCodes } from '../../library/letterCodes';
+import { Wrapper, ScrollView, Title, ArticlesWrapper } from '../../components/UI';
 
-const Wrapper = styled.View`
-  flex: 1;
-  position: relative;
-`;
-const ScrollView = styled.ScrollView``;
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 10px;  
-`;
-const PageWrapper = styled.View`
-  flex: 1;
-  padding: 6px;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
 
 export default function TopNews (props) {
   const { selectedCountry, articles } = useSelector(state => state.test);
@@ -57,7 +40,7 @@ export default function TopNews (props) {
       />
       <ScrollView>
         <Title>{getTitle()}</Title>
-        <PageWrapper>
+        <ArticlesWrapper>
           {articles && !!articles.length && articles.map((item, i) => (
             <NewsItem 
               key={i}
@@ -67,7 +50,7 @@ export default function TopNews (props) {
               onPress={goToArticlePage(item)}
             />
           ))}
-        </PageWrapper>
+        </ArticlesWrapper>
       </ScrollView>
     </Wrapper>
   )

@@ -7,18 +7,8 @@ import NewsItem from '../../components/NewsItem';
 import { GET_NEWS_SAGA, SET_COUNTRY_SAGA } from '../../store/actions';
 import { LetterCodes } from '../../library/letterCodes';
 import Colors from '../../library/colors';
+import { Wrapper, ScrollView, Title, ArticlesWrapper } from '../../components/UI';
 
-const Wrapper = styled.View`
-  flex: 1;
-  position: relative;
-`;
-const ScrollView = styled.ScrollView``;
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 10px;
-`;
 const SearchWrapper = styled.View`
   flex-direction: row;
   justify-content: center;
@@ -35,12 +25,6 @@ const InputSearch = styled.TextInput`
   width: 250px;
 `;
 const ButtonSearch = styled.TouchableOpacity``;
-const ArticlesWrapper = styled.View`
-  flex: 1;
-  padding: 6px;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
 const FallbackText = styled.Text`
   align-self: center;
   margin-top: 10px;
