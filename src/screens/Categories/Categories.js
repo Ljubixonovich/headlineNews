@@ -14,6 +14,9 @@ import { mock } from '../../../apiKey';
 
 const List = styled.View`
   flex: 1;
+  margin-top: ${({noTopMargin}) => (noTopMargin ? '0' : '10')}px;
+  margin-bottom: 10px;
+  background-color: ${Colors.lightGray};
 `;
 const TitleWrapper = styled.View`
   flex: 1;
@@ -27,11 +30,10 @@ const CategoryTitle = styled.Text`
   margin-left: 30px;
   margin-right: 20px;
 `;
-
 const Line = styled.View`
   height: 1px;
-  width: 300px;
-  background-color: ${Colors.blue};
+  width: 350px;
+  background-color: ${Colors.black};
   margin-top: 10px;
   margin-bottom: 10px;
   align-self: center;
@@ -65,43 +67,44 @@ export default function TopNews (props) {
       />
       <ScrollView>
 
-        <List>
-          <TitleWrapper>
-            <CategoryTitle>Title</CategoryTitle>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={toggleExpandListHandler}
-            >
-              <Icon
-                size={30}
-                color={Colors.black}
-                name={horizontalList ? 'chevron-down' : 'chevron-up'}
-              />
-            </TouchableOpacity>
-          </TitleWrapper>
+        <>
+          <List noTopMargin>
+            <TitleWrapper>
+              <CategoryTitle>Title</CategoryTitle>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                onPress={toggleExpandListHandler}
+              >
+                <Icon
+                  size={30}
+                  color={Colors.black}
+                  name={horizontalList ? 'chevron-down' : 'chevron-up'}
+                />
+              </TouchableOpacity>
+            </TitleWrapper>
 
-          {horizontalList ? (
-            <CategoryList
-              onArticlePress={goToArticlePage}
-              news={mock}
-            />
-            ) : (
-          <ArticlesWrapper>
-            {mock && !!mock.length && mock.map((item, i) => (
-              <NewsItem
-                key={i}
-                title={item.title}
-                description={item.description}
-                urlToImage={item.urlToImage}
-                onPress={goToArticlePage(item)}
+            {horizontalList ? (
+              <CategoryList
+                onArticlePress={goToArticlePage}
+                news={mock}
               />
-            ))}
-          </ArticlesWrapper>)}
-
+              ) : (
+              <ArticlesWrapper>
+                {mock && !!mock.length && mock.map((item, i) => (
+                  <NewsItem
+                    key={i}
+                    title={item.title}
+                    description={item.description}
+                    urlToImage={item.urlToImage}
+                    onPress={goToArticlePage(item)}
+                  />
+                ))}
+              </ArticlesWrapper>
+            )}
+          </List>
           <Line />
-        </List>
+        </>
 
-       
       </ScrollView>
     </Wrapper>
   )
