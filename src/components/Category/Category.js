@@ -24,6 +24,7 @@ const CategoryTitle = styled.Text`
   margin-left: 30px;
   margin-right: 20px;
 `;
+const View = styled.View``;
 const Line = styled.View`
   height: 1px;
   width: 350px;
@@ -55,19 +56,21 @@ export default function Category({
 
         <TitleWrapper>
           <CategoryTitle>{title}</CategoryTitle>
-          <TouchableOpacity
-            activeOpacity={0.75}
-            onPress={toggleExpandListHandler}
-          >
-            <Icon
-              size={30}
-              color={Colors.black}
-              name={horizontalList ? 'chevron-down' : 'chevron-up'}
-            />
-          </TouchableOpacity>
+          {!!articles.length && (
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onPress={toggleExpandListHandler}
+            >
+              <Icon
+                size={30}
+                color={Colors.black}
+                name={horizontalList ? 'chevron-down' : 'chevron-up'}
+              />
+            </TouchableOpacity>
+          )}
         </TitleWrapper>
 
-        {horizontalList ? (
+        {!articles.length ? (<View />) : (horizontalList ? (
           <HorizontalCategory
             news={reduceList(articles)}
             onArticlePress={onArticlePress}
@@ -84,7 +87,7 @@ export default function Category({
               />
             ))}
           </ArticlesWrapper>
-        )}
+        ))}
       </List>
 
       <Line />
