@@ -1,11 +1,14 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import styled from "styled-components/native";
 import Colors from '../../library/colors';
+
+const { width: winWidth } = Dimensions.get('window');
 
 const Wrapper = styled.TouchableOpacity`
   margin: 5px;
   padding: 5px;
-  width: 185px;
+  width: ${winWidth * 0.455}px;
   border: 1px solid ${Colors.gray};
   border-radius: 5px;
 `;
