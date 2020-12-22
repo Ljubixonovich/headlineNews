@@ -16,13 +16,14 @@ const TitleWrapper = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  margin-left: 25px;
+  margin-right: 25px;
 `;
 const TouchableOpacity = styled.TouchableOpacity``;
 const CategoryTitle = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  margin-left: 30px;
-  margin-right: 20px;
 `;
 const View = styled.View``;
 const Line = styled.View`
@@ -35,9 +36,10 @@ const Line = styled.View`
 `;
 
 export default function Category({
-  title = '',
+  name = '',
   articles = [],
   noTopMargin = false,
+  selectedCountry = 'us',
   onArticlePress = () => {},
 }) {
   const [horizontalList, setHorizontalList] = useState(true);
@@ -50,12 +52,19 @@ export default function Category({
     return list.length >= 5 ? list.slice(0, 5) : list;
   }
 
+  const getTitle = () => {
+    let text = horizontalList ? 
+      `Top 5 ${name} news from ${selectedCountry.toUpperCase()}` :
+      `Top ${name} news from ${selectedCountry.toUpperCase()}`;
+    return text;
+  }
+
   return (
     <>
       <List noTopMargin={noTopMargin}>
 
         <TitleWrapper>
-          <CategoryTitle>{title}</CategoryTitle>
+          <CategoryTitle>{getTitle()}</CategoryTitle>
           {!!articles.length && (
             <TouchableOpacity
               activeOpacity={0.75}
