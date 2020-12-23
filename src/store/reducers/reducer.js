@@ -6,7 +6,7 @@ import {
   TOGGLE_LOADING,
 } from '../actions';
 
-const initialState = {
+export const initialState = {
   selectedCountry: 'us',
   loading: false,
   articles: [],
