@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 const { width: winWidth } = Dimensions.get('window');
 
-const Wrapper = styled.TouchableOpacity`
+export const Wrapper = styled.TouchableOpacity`
   padding: 5px;
   width: ${winWidth * 0.6}px;
   height: 120px;
@@ -12,14 +12,14 @@ const Wrapper = styled.TouchableOpacity`
 const Title = styled.Text`
   font-weight: bold;
 `;
-const Image = styled.Image`
+export const Image = styled.Image`
   align-self: center;
   margin-top: 5px;
   margin-bottom: 5px;
   width: 60px;
   height: 60px;
 `;
-const ImagePlaceholder = styled.View`
+export const ImagePlaceholder = styled.View`
   align-self: center;
   margin-top: 5px;
   margin-bottom: 5px;
