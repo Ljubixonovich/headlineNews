@@ -55,8 +55,8 @@ function* getNewsWithCategories(action) {
       categoryIdentifier = `articles_${categories[i]}`;
       yield put({
         type: GET_NEWS_WITH_CATEGORIES,
-        [categoryIdentifier]: articles,
-        category: categoryIdentifier
+        articles,
+        articlesCategory: categoryIdentifier
       });
     }
     yield put ({ type: TOGGLE_LOADING, loading: false });

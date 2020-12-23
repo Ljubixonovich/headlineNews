@@ -39,13 +39,7 @@ export default function reducer (state = initialState, action) {
     case GET_NEWS_WITH_CATEGORIES:
       return {
         ...state,
-        articles_business: action.category === 'articles_business' ? action.articles_business : state.articles_business,
-        articles_entertainment: action.category === 'articles_entertainment' ? action.articles_entertainment : state.articles_entertainment,
-        articles_general: action.category === 'articles_general' ? action.articles_general : state.articles_general,
-        articles_health: action.category === 'articles_health' ? action.articles_health : state.articles_health,
-        articles_science: action.category === 'articles_science' ? action.articles_science : state.articles_science,
-        articles_sports: action.category === 'articles_sports' ? action.articles_sports : state.articles_sports,
-        articles_technology: action.category === 'articles_technology' ? action.articles_technology : state.articles_technology,
+        [action.articlesCategory]: action.articles,      
       }
 
     case SET_COUNTRY:
