@@ -12,12 +12,7 @@ const rootReducer = combineReducers({
   test: testReducer,
 });
 
-
 let composeEnchancers = compose;
-if (__DEV__) {
-  composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  || compose;
-}
 
 const sagaMiddleware = createSagaMiddleware();
 

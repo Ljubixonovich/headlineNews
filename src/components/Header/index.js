@@ -55,7 +55,6 @@ const HeaderOption = styled.TouchableOpacity`
 export default function Header({
   title = '',
   back = false,
-  options = LetterCodes,
   onBackPress = () => {},
   onMenuPress = () => {},
   changeLanguage = () => {},
@@ -151,7 +150,7 @@ export default function Header({
               { opacity: fadeAnim }
             ]}
           >
-            {options.length > 0 && options.map((item, i) => (
+            {LetterCodes.length > 0 && LetterCodes.map((item, i) => (
               <HeaderOption
                 key={i}
                 activeOpacity={0.75}
