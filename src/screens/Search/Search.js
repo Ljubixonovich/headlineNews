@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from "styled-components/native";
 import Header from '../../components/Header';
 import NewsItem from '../../components/NewsItem';
-import { GET_NEWS_SAGA, SET_COUNTRY_SAGA } from '../../store/actions';
+import { GET_NEWS_WITH_SEARCH_SAGA, SET_COUNTRY_SAGA } from '../../store/actions';
 import { LetterCodes } from '../../library/letterCodes';
 import Colors from '../../library/colors';
 import { Wrapper, ScrollView, Title, ArticlesWrapper } from '../../components/UI';
@@ -36,7 +36,7 @@ export default function Search (props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: GET_NEWS_SAGA, selectedCountry, search: search.trim().toLowerCase() });
+    dispatch({ type: GET_NEWS_WITH_SEARCH_SAGA, selectedCountry, search: search.trim().toLowerCase() });
   }, [selectedCountry])
 
   const toggleDrawer = () => {
@@ -61,7 +61,7 @@ export default function Search (props) {
 
   const searchSubmitHandler = () => {
     dispatch({
-      type: GET_NEWS_SAGA,
+      type: GET_NEWS_WITH_SEARCH_SAGA,
       selectedCountry,
       search: search.trim().toLowerCase()
     });

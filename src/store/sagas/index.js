@@ -3,6 +3,7 @@ import {
   GET_NEWS_SAGA,
   GET_NEWS,
   GET_NEWS_WITH_SEARCH,
+  GET_NEWS_WITH_SEARCH_SAGA,
   GET_NEWS_WITH_CATEGORIES_SAGA,
   GET_NEWS_WITH_CATEGORIES,
   SET_COUNTRY_SAGA,
@@ -12,7 +13,7 @@ import {
 import API from '../../library/api';
 
 
-function* getNews(action) {
+function* getNewsWithSearch(action) {
   try {
     yield put ({ type: TOGGLE_LOADING, loading: true });
     const selectedCountry = action.selectedCountry || 'us';
@@ -35,10 +36,31 @@ function* getNews(action) {
     }
     yield put ({ type: TOGGLE_LOADING, loading: false });
   } catch (error) {
+     console.log('getNewsWithSearch saga ', error);
+     yield put ({ type: TOGGLE_LOADING, loading: false });
+  }
+}
+
+function* getNews(action) {
+  try {
+    yield put ({ type: TOGGLE_LOADING, loading: true });
+    const selectedCountry = action.selectedCountry || 'us';
+    const selectedCategory = action.selectedCategory || '';
+    const pageSize = action.pageSize || 0;
+    let articles = yield call(API.getTopNews, {
+      selectedCountry,
+      selectedCategory,
+      pageSize
+    });
+    yield put({ type: GET_NEWS, articles: articles });
+
+    yield put ({ type: TOGGLE_LOADING, loading: false });
+  } catch (error) {
      console.log('getNews saga ', error);
      yield put ({ type: TOGGLE_LOADING, loading: false });
   }
 }
+
 
 function* getNewsWithCategories(action) {
   try {
@@ -75,7 +97,8 @@ function* setCountry(action) {
 }
 
 export default function* rootSaga() {
-  yield takeLatest(GET_NEWS_SAGA, getNews);
   yield takeLatest(SET_COUNTRY_SAGA, setCountry);
+  yield takeLatest(GET_NEWS_SAGA, getNews);
+  yield takeLatest(GET_NEWS_WITH_SEARCH_SAGA, getNewsWithSearch);
   yield takeLatest(GET_NEWS_WITH_CATEGORIES_SAGA, getNewsWithCategories);
 }

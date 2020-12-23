@@ -39,7 +39,7 @@ export default function reducer (state = initialState, action) {
     case GET_NEWS_WITH_CATEGORIES:
       return {
         ...state,
-        [action.articlesCategory]: action.articles,      
+        [action.articlesCategory]: action.articles,
       }
 
     case SET_COUNTRY:

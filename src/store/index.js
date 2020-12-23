@@ -6,10 +6,10 @@ import {
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
-import testReducer from './reducers/testReducer';
+import reducer from './reducers/reducer';
 
 const rootReducer = combineReducers({
-  test: testReducer,
+  test: reducer,
 });
 
 let composeEnchancers = compose;
