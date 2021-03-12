@@ -11,7 +11,6 @@ export default function Categories (props) {
     selectedCountry,
     articles_business,
     articles_entertainment,
-    articles_general,
     articles_health,
     articles_science,
     articles_sports,
@@ -47,9 +46,6 @@ export default function Categories (props) {
       case 'entertainment':
         return articles_entertainment;
         break;
-      case 'general':
-        return articles_general;
-        break;
       case 'health':
         return articles_health;
         break;
@@ -78,7 +74,7 @@ export default function Categories (props) {
       <ScrollView>
         {newsCategories.map((item, i) => (
           <Category
-            key={i}
+            key={item}
             name={item}
             articles={getArticles(item)}
             selectedCountry={selectedCountry}

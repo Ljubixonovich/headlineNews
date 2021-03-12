@@ -14,7 +14,6 @@ export const initialState = {
 
   articles_business: [],
   articles_entertainment: [],
-  articles_general: [],
   articles_health: [],
   articles_science: [],
   articles_sports: [],
