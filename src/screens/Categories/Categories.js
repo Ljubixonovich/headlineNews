@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import { FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/Header';
 import Category from '../../components/Category';
 import { newsCategories } from '../../library/newsCategories';
 import { GET_NEWS_WITH_CATEGORIES_SAGA, SET_COUNTRY_SAGA } from '../../store/actions';
-import { Wrapper, ScrollView } from '../../components/UI';
+import { Wrapper } from '../../components/UI';
 
 export default function Categories (props) {
   const {
@@ -64,6 +65,19 @@ export default function Categories (props) {
     }
   }
 
+  const renderCategory = ({ item, index }) => {
+    return (
+      <Category
+        key={item.url}
+        name={item}
+        articles={getArticles(item)}
+        selectedCountry={selectedCountry}
+        noTopMargin={index === 0 ? true : false}
+        onArticlePress={goToArticlePage}
+      />
+    );
+  }
+
   return (
     <Wrapper>
       <Header
@@ -71,18 +85,13 @@ export default function Categories (props) {
         onMenuPress={toggleDrawer}
         changeLanguage={changeLanguageHandler}
       />
-      <ScrollView>
-        {newsCategories.map((item, i) => (
-          <Category
-            key={item}
-            name={item}
-            articles={getArticles(item)}
-            selectedCountry={selectedCountry}
-            noTopMargin={i === 0 ? true : false}
-            onArticlePress={goToArticlePage}
-          />
-        ))}
-      </ScrollView>
+      {newsCategories && !!newsCategories.length && (
+        <FlatList 
+          data={newsCategories}
+          keyExtractor={(item, index) => item.toString()}
+          renderItem={renderCategory}
+        />
+      )}
     </Wrapper>
   )
 }

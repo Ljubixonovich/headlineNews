@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FlatList } from 'react-native';
 import styled from "styled-components/native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HorizontalCategory from './HorizontalCategory';
@@ -59,8 +60,21 @@ export default function Category({
     return text;
   }
 
+  const renderNewsItem = ({ item, index }) => {    
+    return (
+      <NewsItem
+        key={item.url}
+        title={item.title}
+        description={item.description}
+        urlToImage={item.urlToImage}
+        onPress={onArticlePress(item)}
+      />
+    );
+  }
+
   return (
-    <>
+    
+    <View style={{flex: 1}}>
       <List noTopMargin={noTopMargin}>
 
         <TitleWrapper>
@@ -86,20 +100,17 @@ export default function Category({
           />
           ) : (
           <ArticlesWrapper>
-            {articles && !!articles.length && articles.map((item, i) => (
-              <NewsItem
-                key={i}
-                title={item.title}
-                description={item.description}
-                urlToImage={item.urlToImage}
-                onPress={onArticlePress(item)}
-              />
-            ))}
+            {articles && !!articles.length && <FlatList
+              keyExtractor={(item, index) => item.url.toString()}
+              data={articles}
+              renderItem={renderNewsItem}
+              numColumns={2}
+            />}
           </ArticlesWrapper>
         ))}
       </List>
 
       <Line />
-    </>
+    </View>
   )
 }
