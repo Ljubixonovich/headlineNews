@@ -1,9 +1,10 @@
-import React from 'react';
-import { Dimensions } from 'react-native';
-import styled from "styled-components/native";
+import React, {memo} from 'react';
+import {Dimensions} from 'react-native';
+import styled from 'styled-components/native';
+import FastImage from 'react-native-fast-image';
 import Colors from '../../library/colors';
 
-const { width: winWidth } = Dimensions.get('window');
+const {width: winWidth} = Dimensions.get('window');
 
 const Wrapper = styled.TouchableOpacity`
   margin: 5px;
@@ -33,21 +34,31 @@ const Description = styled.Text`
   font-size: 13px;
 `;
 
-export default function NewsItem({
+export default memo(function NewsItem({
   title = '',
   description = '',
   urlToImage = '',
   onPress = () => {},
 }) {
+  console.log('NewsItem render');
   return (
     <Wrapper onPress={onPress}>
       <Title>{title}</Title>
       {!!urlToImage ? (
-        <Image source={{ uri: urlToImage }} />
-        ) : (
+        // <Image source={{ uri: urlToImage }}  />
+        <FastImage
+          source={{uri: urlToImage}}
+          style={{
+            width: 60,
+            height: 60,
+            alignSelf: 'center',
+            marginVertical: 5,
+          }}
+        />
+      ) : (
         <ImagePlaceholder />
       )}
       <Description>{description}</Description>
     </Wrapper>
   );
-}
+});

@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
   flex: 1;
@@ -17,6 +17,6 @@ export const Title = styled.Text`
 export const ArticlesWrapper = styled.View`
   flex: 1;
   padding: 6px;
-  flex-direction: row;
+  flex-direction: ${({row}) => (row ? 'row' : 'column')};
   flex-wrap: wrap;
 `;

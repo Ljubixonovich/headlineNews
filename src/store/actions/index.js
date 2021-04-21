@@ -11,3 +11,5 @@ export const TOGGLE_LOADING = 'TOGGLE_LOADING';
 
 export const SET_COUNTRY = 'SET_COUNTRY';
 export const SET_COUNTRY_SAGA = 'SET_COUNTRY_SAGA';
+
+export const SET_COLOR = 'SET_COLOR';

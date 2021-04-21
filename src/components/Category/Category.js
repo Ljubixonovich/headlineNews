@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { FlatList } from 'react-native';
-import styled from "styled-components/native";
+import React, {useState} from 'react';
+import {FlatList} from 'react-native';
+import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HorizontalCategory from './HorizontalCategory';
-import { ArticlesWrapper } from '../../components/UI';
+import {ArticlesWrapper} from '../../components/UI';
 import NewsItem from '../../components/NewsItem';
 import Colors from '../../library/colors';
 
@@ -47,20 +47,20 @@ export default function Category({
 
   const toggleExpandListHandler = () => {
     setHorizontalList(!horizontalList);
-  }
+  };
 
   const reduceList = (list) => {
     return list.length >= 5 ? list.slice(0, 5) : list;
-  }
+  };
 
   const getTitle = () => {
-    let text = horizontalList ? 
-      `Top 5 ${name} news from ${selectedCountry.toUpperCase()}` :
-      `Top ${name} news from ${selectedCountry.toUpperCase()}`;
+    let text = horizontalList
+      ? `Top 5 ${name} news from ${selectedCountry.toUpperCase()}`
+      : `Top ${name} news from ${selectedCountry.toUpperCase()}`;
     return text;
-  }
+  };
 
-  const renderNewsItem = ({ item, index }) => {    
+  const renderNewsItem = ({item, index}) => {
     return (
       <NewsItem
         key={item.url}
@@ -70,20 +70,17 @@ export default function Category({
         onPress={onArticlePress(item)}
       />
     );
-  }
+  };
 
   return (
-    
     <View style={{flex: 1}}>
       <List noTopMargin={noTopMargin}>
-
         <TitleWrapper>
           <CategoryTitle>{getTitle()}</CategoryTitle>
           {!!articles.length && (
             <TouchableOpacity
               activeOpacity={0.75}
-              onPress={toggleExpandListHandler}
-            >
+              onPress={toggleExpandListHandler}>
               <Icon
                 size={30}
                 color={Colors.black}
@@ -93,24 +90,28 @@ export default function Category({
           )}
         </TitleWrapper>
 
-        {!articles.length ? (<View />) : (horizontalList ? (
+        {!articles.length ? (
+          <View />
+        ) : horizontalList ? (
           <HorizontalCategory
             news={reduceList(articles)}
             onArticlePress={onArticlePress}
           />
-          ) : (
+        ) : (
           <ArticlesWrapper>
-            {articles && !!articles.length && <FlatList
-              keyExtractor={(item, index) => item.url.toString()}
-              data={articles}
-              renderItem={renderNewsItem}
-              numColumns={2}
-            />}
+            {articles && !!articles.length && (
+              <FlatList
+                keyExtractor={(item, index) => item.url.toString()}
+                data={articles}
+                renderItem={renderNewsItem}
+                numColumns={2}
+              />
+            )}
           </ArticlesWrapper>
-        ))}
+        )}
       </List>
 
       <Line />
     </View>
-  )
+  );
 }
