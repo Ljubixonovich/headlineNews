@@ -53,4 +53,4 @@ export const LetterCodes = [
   { code: 'us', country: 'USA' },
   { code: 've', country: 'Venezuela' },
   { code: 'za', country: 'South Africa' },
-];
+]

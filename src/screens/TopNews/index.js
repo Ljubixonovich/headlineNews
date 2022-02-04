@@ -1,3 +1,3 @@
-import TopNews from "./TopNews";
+import TopNews from './TopNews'
 
-export default TopNews;
+export default TopNews

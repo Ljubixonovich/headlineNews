@@ -8,13 +8,13 @@ import {
   GET_NEWS_WITH_CATEGORIES,
   SET_COUNTRY_SAGA,
   SET_COUNTRY,
-  TOGGLE_LOADING,
+  SET_LOADING,
 } from '../actions'
 import API from '../../library/api'
 
 function* getNewsWithSearch(action) {
   try {
-    yield put({ type: TOGGLE_LOADING, loading: true })
+    yield put({ type: SET_LOADING, loading: true })
     const selectedCountry = action.selectedCountry || 'us'
     const selectedCategory = action.selectedCategory || ''
     const pageSize = action.pageSize || 0
@@ -33,16 +33,16 @@ function* getNewsWithSearch(action) {
     } else {
       yield put({ type: GET_NEWS, articles: articles })
     }
-    yield put({ type: TOGGLE_LOADING, loading: false })
+    yield put({ type: SET_LOADING, loading: false })
   } catch (error) {
     console.log('getNewsWithSearch saga ', error)
-    yield put({ type: TOGGLE_LOADING, loading: false })
+    yield put({ type: SET_LOADING, loading: false })
   }
 }
 
 function* getNews(action) {
   try {
-    yield put({ type: TOGGLE_LOADING, loading: true })
+    yield put({ type: SET_LOADING, loading: true })
     const selectedCountry = action.selectedCountry || 'us'
     const selectedCategory = action.selectedCategory || ''
     const pageSize = action.pageSize || 0
@@ -53,16 +53,16 @@ function* getNews(action) {
     })
     yield put({ type: GET_NEWS, articles: articles })
 
-    yield put({ type: TOGGLE_LOADING, loading: false })
+    yield put({ type: SET_LOADING, loading: false })
   } catch (error) {
     console.log('getNews saga ', error)
-    yield put({ type: TOGGLE_LOADING, loading: false })
+    yield put({ type: SET_LOADING, loading: false })
   }
 }
 
 function* getNewsWithCategories(action) {
   try {
-    yield put({ type: TOGGLE_LOADING, loading: true })
+    yield put({ type: SET_LOADING, loading: true })
     const selectedCountry = action.selectedCountry || 'us'
     const categories = action.categories
     let articles = []
@@ -79,10 +79,10 @@ function* getNewsWithCategories(action) {
         articlesCategory: categoryIdentifier,
       })
     }
-    yield put({ type: TOGGLE_LOADING, loading: false })
+    yield put({ type: SET_LOADING, loading: false })
   } catch (error) {
     console.log('getNewsWithCategories saga ', error)
-    yield put({ type: TOGGLE_LOADING, loading: false })
+    yield put({ type: SET_LOADING, loading: false })
   }
 }
 

@@ -1,54 +1,31 @@
-import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import StackTopNews from './StackTopNews';
-import StackCategories from './StackCategories';
-import StackSearch from './StackSearch';
+import React from 'react'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import StackTopNews from './StackTopNews'
+import StackCategories from './StackCategories'
+import StackSearch from './StackSearch'
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator()
 
-const Stack_TopNews = () => (
-  <StackTopNews initialRouteName="TopNews" />
-  );
+const Stack_TopNews = () => <StackTopNews initialRouteName="TopNews" />
 
-const Stack_Categories = () => (
-  <StackCategories initialRouteName="Categories" />
-);
+const Stack_Categories = () => <StackCategories initialRouteName="Categories" />
 
-const Stack_Search = () => (
-  <StackSearch initialRouteName="Search" />
-);
+const Stack_Search = () => <StackSearch initialRouteName="Search" />
 
-export default function ({
-  initialRouteName = 'TopNews',
-}) {
+export default function ({ initialRouteName = 'TopNews' }) {
   return (
-    <Drawer.Navigator
-      initialRouteName={initialRouteName}
-    >
-      <Drawer.Screen
-        key="TopNews"
-        name="TopNews"
-        options={{swipeEnabled: false}}
-      >
+    <Drawer.Navigator initialRouteName={initialRouteName}>
+      <Drawer.Screen key="TopNews" name="TopNews" options={{ swipeEnabled: false }}>
         {Stack_TopNews}
       </Drawer.Screen>
 
-      <Drawer.Screen
-        key="Categories"
-        name="Categories"
-        options={{swipeEnabled: false}}
-      >
+      <Drawer.Screen key="Categories" name="Categories" options={{ swipeEnabled: false }}>
         {Stack_Categories}
       </Drawer.Screen>
 
-      <Drawer.Screen
-        key="Search"
-        name="Search"
-        options={{swipeEnabled: false}}
-      >
+      <Drawer.Screen key="Search" name="Search" options={{ swipeEnabled: false }}>
         {Stack_Search}
       </Drawer.Screen>
-
     </Drawer.Navigator>
-  );
+  )
 }

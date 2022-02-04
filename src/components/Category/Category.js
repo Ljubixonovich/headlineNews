@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
-import {FlatList} from 'react-native';
-import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import HorizontalCategory from './HorizontalCategory';
-import {ArticlesWrapper} from '../../components/UI';
-import NewsItem from '../../components/NewsItem';
-import Colors from '../../library/colors';
+import React, { useState } from 'react'
+import { FlatList } from 'react-native'
+import styled from 'styled-components/native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import HorizontalCategory from './HorizontalCategory'
+import { ArticlesWrapper } from '../../components/UI'
+import NewsItem from '../../components/NewsItem'
+import Colors from '../../library/colors'
 
 const List = styled.View`
   flex: 1;
-  margin-top: ${({noTopMargin}) => (noTopMargin ? '0' : '10')}px;
+  margin-top: ${({ noTopMargin }) => (noTopMargin ? '0' : '10')}px;
   margin-bottom: 10px;
   background-color: ${Colors.lightGray};
-`;
+`
 const TitleWrapper = styled.View`
   flex: 1;
   flex-direction: row;
@@ -20,13 +20,13 @@ const TitleWrapper = styled.View`
   justify-content: space-between;
   margin-left: 25px;
   margin-right: 25px;
-`;
-const TouchableOpacity = styled.TouchableOpacity``;
+`
+const TouchableOpacity = styled.TouchableOpacity``
 const CategoryTitle = styled.Text`
   font-size: 18px;
   font-weight: bold;
-`;
-const View = styled.View``;
+`
+const View = styled.View``
 const Line = styled.View`
   height: 1px;
   width: 350px;
@@ -34,7 +34,7 @@ const Line = styled.View`
   margin-top: 10px;
   margin-bottom: 10px;
   align-self: center;
-`;
+`
 
 export default function Category({
   name = '',
@@ -43,24 +43,24 @@ export default function Category({
   selectedCountry = 'us',
   onArticlePress = () => {},
 }) {
-  const [horizontalList, setHorizontalList] = useState(true);
+  const [horizontalList, setHorizontalList] = useState(true)
 
   const toggleExpandListHandler = () => {
-    setHorizontalList(!horizontalList);
-  };
+    setHorizontalList(!horizontalList)
+  }
 
   const reduceList = (list) => {
-    return list.length >= 5 ? list.slice(0, 5) : list;
-  };
+    return list.length >= 5 ? list.slice(0, 5) : list
+  }
 
   const getTitle = () => {
     let text = horizontalList
       ? `Top 5 ${name} news from ${selectedCountry.toUpperCase()}`
-      : `Top ${name} news from ${selectedCountry.toUpperCase()}`;
-    return text;
-  };
+      : `Top ${name} news from ${selectedCountry.toUpperCase()}`
+    return text
+  }
 
-  const renderNewsItem = ({item, index}) => {
+  const renderNewsItem = ({ item, index }) => {
     return (
       <NewsItem
         key={item.url}
@@ -69,23 +69,17 @@ export default function Category({
         urlToImage={item.urlToImage}
         onPress={onArticlePress(item)}
       />
-    );
-  };
+    )
+  }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <List noTopMargin={noTopMargin}>
         <TitleWrapper>
           <CategoryTitle>{getTitle()}</CategoryTitle>
           {!!articles.length && (
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={toggleExpandListHandler}>
-              <Icon
-                size={30}
-                color={Colors.black}
-                name={horizontalList ? 'chevron-down' : 'chevron-up'}
-              />
+            <TouchableOpacity activeOpacity={0.75} onPress={toggleExpandListHandler}>
+              <Icon size={30} color={Colors.black} name={horizontalList ? 'chevron-down' : 'chevron-up'} />
             </TouchableOpacity>
           )}
         </TitleWrapper>
@@ -93,10 +87,7 @@ export default function Category({
         {!articles.length ? (
           <View />
         ) : horizontalList ? (
-          <HorizontalCategory
-            news={reduceList(articles)}
-            onArticlePress={onArticlePress}
-          />
+          <HorizontalCategory news={reduceList(articles)} onArticlePress={onArticlePress} />
         ) : (
           <ArticlesWrapper>
             {articles && !!articles.length && (
@@ -113,5 +104,5 @@ export default function Category({
 
       <Line />
     </View>
-  );
+  )
 }

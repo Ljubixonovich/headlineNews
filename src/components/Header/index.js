@@ -1,20 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
-import {
-  StyleSheet,
-  Animated,
-} from 'react-native';
-import { useSelector } from 'react-redux';
-import styled from "styled-components/native";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { LetterCodes } from '../../library/letterCodes';
-import ActivityIndicator from '../ActivityIndicator';
-import Overlay from '../Overlay';
-import Colors from '../../library/colors';
+import React, { useEffect, useState, useRef } from 'react'
+import { StyleSheet, Animated } from 'react-native'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components/native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { LetterCodes } from '../../library/letterCodes'
+import ActivityIndicator from '../ActivityIndicator'
+import Overlay from '../Overlay'
+import Colors from '../../library/colors'
 
-const StatusBar = styled.StatusBar``;
-const TouchableOpacity = styled.TouchableOpacity``;
-const View = styled.View``;
-const Text = styled.Text``;
+const StatusBar = styled.StatusBar``
+const TouchableOpacity = styled.TouchableOpacity``
+const View = styled.View``
+const Text = styled.Text``
 const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
@@ -23,34 +20,34 @@ const Wrapper = styled.View`
   background-color: ${Colors.lightBlue};
   padding-left: 20px;
   padding-right: 20px;
-`;
+`
 const LeftIcon = styled.View`
   width: 50px;
   height: 50px;
   align-items: center;
   justify-content: center;
-`;
+`
 const Title = styled.Text`
   font-size: 20px;
   font-weight: bold;
   color: ${Colors.black};
   text-align: center;
-`;
+`
 const Languages = styled.View`
   flex-direction: row;
   width: 50px;
   height: 50px;
   align-items: center;
   justify-content: center;
-`;
+`
 const LanguageText = styled.Text`
   font-size: 20px;
-  font-weight: ${({selected}) => (selected ? 'bold' : 'normal')};
-  color: ${({disabled}) => (disabled ? Colors.gray : Colors.black)};
-`;
+  font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
+  color: ${({ disabled }) => (disabled ? Colors.gray : Colors.black)};
+`
 const HeaderOption = styled.TouchableOpacity`
   padding: 10px;
-`;
+`
 
 export default function Header({
   title = '',
@@ -59,12 +56,12 @@ export default function Header({
   onMenuPress = () => {},
   changeLanguage = () => {},
 }) {
-  const [optionsVisible, setOptionsVisible] = useState(false);
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const { selectedCountry, loading } = useSelector(state => state.test);
+  const [optionsVisible, setOptionsVisible] = useState(false)
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  const { selectedCountry, loading } = useSelector((state) => state.test)
 
   useEffect(() => {
-    optionsVisible && fadeIn();
+    optionsVisible && fadeIn()
   }, [optionsVisible])
 
   const fadeIn = () => {
@@ -72,50 +69,32 @@ export default function Header({
       toValue: 1,
       duration: 200,
       useNativeDriver: true,
-    }).start();
-  };
+    }).start()
+  }
 
   const toggleOptionsVisible = () => {
-    setOptionsVisible(optionsVisible ? false : true);
+    setOptionsVisible(optionsVisible ? false : true)
   }
 
   const optionPressHandler = (item) => () => {
-    setOptionsVisible(false);
-    changeLanguage(item.code);
+    setOptionsVisible(false)
+    changeLanguage(item.code)
   }
 
   return (
     <>
-      <StatusBar
-        backgroundColor={Colors.lightBlue}
-        barStyle="dark-content"
-      />
+      <StatusBar backgroundColor={Colors.lightBlue} barStyle="dark-content" />
 
       <View>
         <Wrapper>
-
           <LeftIcon>
             {back ? (
-              <TouchableOpacity
-                activeOpacity={0.75}
-                onPress={onBackPress}
-              >
-                <Icon
-                  size={30}
-                  color={Colors.black}
-                  name="arrow-left"
-                />
+              <TouchableOpacity activeOpacity={0.75} onPress={onBackPress}>
+                <Icon size={30} color={Colors.black} name="arrow-left" />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                activeOpacity={0.75}
-                onPress={onMenuPress}
-              >
-                <Icon
-                  size={30}
-                  color={Colors.black}
-                  name="menu"
-                />
+              <TouchableOpacity activeOpacity={0.75} onPress={onMenuPress}>
+                <Icon size={30} color={Colors.black} name="menu" />
               </TouchableOpacity>
             )}
           </LeftIcon>
@@ -127,49 +106,29 @@ export default function Header({
               <ActivityIndicator />
             ) : (
               <>
-                <TouchableOpacity
-                  onPress={toggleOptionsVisible}
-                  activeOpacity={0.75}
-                  disabled={back}
-                >
-                  <LanguageText
-                    disabled={back}
-                  >
-                    {selectedCountry.toUpperCase()}
-                  </LanguageText>
+                <TouchableOpacity onPress={toggleOptionsVisible} activeOpacity={0.75} disabled={back}>
+                  <LanguageText disabled={back}>{selectedCountry.toUpperCase()}</LanguageText>
                 </TouchableOpacity>
               </>
             )}
           </Languages>
-
         </Wrapper>
 
         {optionsVisible && (
-          <Animated.View style={[
-              styles.headerOptions,
-              { opacity: fadeAnim }
-            ]}
-          >
-            {LetterCodes.length > 0 && LetterCodes.map((item, i) => (
-              <HeaderOption
-                key={i}
-                activeOpacity={0.75}
-                onPress={optionPressHandler(item)}
-              >
-                <Text>
-                  {item.country}
-                </Text>
-              </HeaderOption>
-            ))}
+          <Animated.View style={[styles.headerOptions, { opacity: fadeAnim }]}>
+            {LetterCodes.length > 0 &&
+              LetterCodes.map((item, i) => (
+                <HeaderOption key={i} activeOpacity={0.75} onPress={optionPressHandler(item)}>
+                  <Text>{item.country}</Text>
+                </HeaderOption>
+              ))}
           </Animated.View>
         )}
       </View>
 
-      {optionsVisible && (
-        <Overlay onPress={toggleOptionsVisible} />
-      )}
+      {optionsVisible && <Overlay onPress={toggleOptionsVisible} />}
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -194,4 +153,4 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     zIndex: 100,
   },
-});
+})
